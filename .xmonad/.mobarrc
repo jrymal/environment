@@ -1,0 +1,37 @@
+Config {
+        font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
+--        font = "xft:Bitstream Vera Sans Mono:size=12:bold:antialias=true"
+--        font = "-*-Fixed-Bold-R-Normal-*-28-*-*-*-*-*-*-*"
+        , borderColor = "black"
+        , border = TopB
+        , bgColor = "black"
+        , fgColor = "grey"
+        , position = TopW L 95
+        , commands = [ 
+                        -- Run Weather "CYVR" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000,
+                        -- Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 10,
+                        -- Run Network "eth1" ["-L","0","-H","32","--normal","green","--high","red"] 10,
+                        Run Battery [
+                            "-t", "<acstatus>: <left>% - <timeleft>",
+                            "--",
+                            "-L","10",
+                            "-H","90",
+                            "-O", "AC",
+                            "-o", "Bat",
+                            "-h", "green",
+                            "-l", "red"
+                        ] 100,
+                        Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 100,
+                        -- Run Memory ["-t","Mem: <usedratio>%"] 10,
+                        -- Run Swap [] 10,
+                        -- Run Com "uname" ["-s","-r"] "" 36000,
+                        -- Run Date "%a %b %_d %Y %H:%M:%S" "date" 10,
+                        Run Date "%FT%H:%M:%S" "date" 10,
+                        Run StdinReader
+                        ]
+        , persistent =       True    -- enable/disable hiding (True = disabled)
+        , allDesktops =      True    -- show on all desktops
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = "%StdinReader% }{ %battery%|<fc=#00ee90>%cpu%</fc>|<fc=#ee9a00>%date%</fc>"
+        }
