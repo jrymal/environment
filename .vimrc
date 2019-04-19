@@ -2,6 +2,7 @@ colorscheme elflord
 
 set backspace=2 " Backspace deletes like most programs in insert mode
 set ruler " show the cursor position all the time
+set showmode " display incomplete commands
 set showcmd " display incomplete commands
 set laststatus=2  " Always display the status line
 set wildmenu " enables the wildmenu
@@ -10,6 +11,10 @@ set wildignore+=*.min.* " ignore specific directories and files
 set smartcase " When searching try to be smart about cases 
 set hlsearch " Highlight search results
 set incsearch " Makes search act like search in modern browsers
+
+set ttyfast
+set mouse=a " Enable mouse in all modes
+set scrolloff=5
 
 " seems osx is lacking some capabilities
 let s:uname = system("echo -n \"$(uname)\"")
@@ -52,10 +57,10 @@ set shiftwidth=4
 set expandtab
 
 " folding settings
-set foldmethod=indent   "fold based on indent
+set foldmethod=manual   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set foldenable        "fold by default
-set foldlevel=2         "this is just what i use
+set foldlevel=4         "this is just what i use
 
 " Make it obvious where 120 characters is
 set textwidth=120
@@ -70,6 +75,24 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+nnoremap <C-Up> <C-w>j
+nnoremap <C-Down> <C-w>k
+nnoremap <C-Left> <C-w>h
+nnoremap <C-Right> <C-w>l
+
+map - <C-W>-
+map + <C-W>+
+
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>Y "+y
+noremap <leader>P "+p
 
 map <f4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw <CR>
 
@@ -129,6 +152,19 @@ function! DoPrettyXML( execType )
 	" restore the filetype
 	exe "set ft=" . l:origft
 endfunction
+
+function! DoPrettyJSON( )
+	" save the filetype so we can restore it later
+	let l:origft = &ft
+	set ft=
+    silent %!json_pp - 2> /dev/null
+    " back to home
+	1
+	" restore the filetype
+	exe "set ft=" . l:origft
+endfunction
+
+command! PrettyJSON call DoPrettyJSON()
 command! PrettyXML call DoPrettyXML('')
 command! PrettyHTML call DoPrettyXML('html')
 
