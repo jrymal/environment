@@ -17,11 +17,12 @@ set mouse=a " Enable mouse in all modes
 set scrolloff=5
 
 " seems osx is lacking some capabilities
-let s:uname = system("echo -n \"$(uname)\"")
-if !v:shell_error && s:uname == "Linux"
-    set wildignorecase " case-insensitive search
-endif
+"let s:uname = system("echo -n \"$(uname)\"")
+"if !v:shell_error && s:uname == "Linux"
+"   set wildignorecase " case-insensitive search
+"endif
 
+set wildignorecase " case-insensitive search
 
 set lazyredraw " Don't redraw while executing macros (good performance config)
 set magic " For regular expressions turn magic on
@@ -71,23 +72,18 @@ set splitbelow
 set splitright
 
 " Quicker window movement
+nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-nnoremap <C-Up> <C-w>j
-nnoremap <C-Down> <C-w>k
-nnoremap <C-Left> <C-w>h
-nnoremap <C-Right> <C-w>l
+map <C-W><Left> <C-w>h
+map <C-W><Down> <C-w>j
+map <C-W><Up> <C-w>k
+map <C-W><Right> <C-w>l
 
 map - <C-W>-
 map + <C-W>+
-
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
 
 noremap <leader>y "*y
 noremap <leader>p "*p
