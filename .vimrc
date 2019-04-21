@@ -64,8 +64,7 @@ set foldenable        "fold by default
 set foldlevel=4         "this is just what i use
 
 " Make it obvious where 120 characters is
-set textwidth=120
-set colorcolumn=+1
+set colorcolumn=121
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -108,7 +107,6 @@ function ChangeTag(to)
     call setline(getpos(".")[1], substitute(getline(getpos(".")[1]), l:from, a:to, ""))
     normal \<esc>
 endfunction
-command! -nargs=1 ChangeTag call ChangeTag(<f-args>)
 
 function! DoPrettyXML( execType )
 	" save the filetype so we can restore it later
@@ -160,9 +158,17 @@ function! DoPrettyJSON( )
 	exe "set ft=" . l:origft
 endfunction
 
+function! Config_java( )
+    " force a break at 120 for java files
+    set textwidth=120
+endfunction
+
+command! -nargs=1 ChangeTag call ChangeTag(<f-args>)
 command! PrettyJSON call DoPrettyJSON()
 command! PrettyXML call DoPrettyXML('')
 command! PrettyHTML call DoPrettyXML('html')
+
+au BufNewFile,BufRead *.java call Config_java()
 
 call plug#begin()
 
