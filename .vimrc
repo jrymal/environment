@@ -91,15 +91,6 @@ noremap <leader>P "+p
 
 map <f4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw <CR>
 
-if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
-endif
-
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-   source ~/.vimrc.local
-endif
-
 function ChangeTag(to)
     let l:from = expand("<cword>")
     normal vat
@@ -170,16 +161,30 @@ command! PrettyHTML call DoPrettyXML('html')
 
 au BufNewFile,BufRead *.java call Config_java()
 
-call plug#begin()
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+endif
 
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf'
+" Local config
+if filereadable($HOME . "/.vimrc.local")
+   source ~/.vimrc.local
+endif
 
-" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'scrooloose/nerdtree'
 
-Plug 'tpope/vim-sensible'
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+    " if we have plug.vim available, load these plugins
 
-Plug 'pangloss/vim-javascript'
+    call plug#begin()
 
-call plug#end()
+    " Plugin outside ~/.vim/plugged with post-update hook
+    Plug 'junegunn/fzf'
+
+    " NERD tree will be loaded on the first invocation of NERDTreeToggle command
+    Plug 'scrooloose/nerdtree'
+
+    Plug 'tpope/vim-sensible'
+
+    Plug 'pangloss/vim-javascript'
+
+    call plug#end()
+endif
