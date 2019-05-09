@@ -16,12 +16,6 @@ set ttyfast
 set mouse=a " Enable mouse in all modes
 set scrolloff=5
 
-" seems osx is lacking some capabilities
-"let s:uname = system("echo -n \"$(uname)\"")
-"if !v:shell_error && s:uname == "Linux"
-"   set wildignorecase " case-insensitive search
-"endif
-
 set wildignorecase " case-insensitive search
 
 set lazyredraw " Don't redraw while executing macros (good performance config)
@@ -35,9 +29,23 @@ syntax enable " Enable syntax highlighting
 " - every subdirectory of the "current directory"
 set path=.,**
 
-" Enable CSCOPE_DB database
-set cscopetag
-cs add $CSCOPE_DB
+" Configure CSCOPE if possible
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+
+  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+endif
 
 " Enable filetype plugins
 filetype plugin on
@@ -90,15 +98,6 @@ noremap <leader>Y "+y
 noremap <leader>P "+p
 
 map <f4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw <CR>
-
-if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
-endif
-
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-   source ~/.vimrc.local
-endif
 
 function ChangeTag(to)
     let l:from = expand("<cword>")
@@ -169,6 +168,16 @@ command! PrettyXML call DoPrettyXML('')
 command! PrettyHTML call DoPrettyXML('html')
 
 au BufNewFile,BufRead *.java call Config_java()
+
+" Local config
+if filereadable($HOME . "/.vimrc.local")
+   source ~/.vimrc.local
+endif
+
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+endif
+
 
 call plug#begin()
 
