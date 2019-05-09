@@ -179,16 +179,19 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 
-call plug#begin()
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+    " if we have plug.vim available, load these plugins
+    call plug#begin()
 
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf'
+    " Plugin outside ~/.vim/plugged with post-update hook
+    Plug 'junegunn/fzf'
 
-" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'scrooloose/nerdtree'
+    " NERD tree will be loaded on the first invocation of NERDTreeToggle command
+    Plug 'scrooloose/nerdtree'
 
-Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-sensible'
 
-Plug 'pangloss/vim-javascript'
+    Plug 'pangloss/vim-javascript'
 
-call plug#end()
+    call plug#end()
+endif
