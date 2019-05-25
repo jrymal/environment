@@ -1,0 +1,2 @@
+HTML Validation via CSS:
+javascript:(function(d,i){c=0;for(u of['https://imbrianj.github.io/debugCSS/debugCSS.css','https://rawgithub.com/Heydon/REVENGE.CSS/master/revenge.css']){l=d.getElementById(i+c);if(l){l.parentNode.removeChild(l);}else{l=d.createElement('link');l.id=i+c;l.rel='stylesheet';l.type='text/css';l.href=u;d.getElementsByTagName('head')[0].appendChild(l);}c++;}}(document,'debugCSS'))

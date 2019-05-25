@@ -1,4 +1,8 @@
-colorscheme elflord
+"colorscheme desert
+colorscheme pablo
+
+set clipboard=unnamed
+" set clipboard=unnamedplus
 
 set backspace=2 " Backspace deletes like most programs in insert mode
 set ruler " show the cursor position all the time
@@ -164,10 +168,25 @@ function! Config_java( )
     set textwidth=120
 endfunction
 
+function! DoPrettyJS( )
+    set filetype=javascript
+    %s:\([{};]\):&\r:g
+    execute "normal! ggVG="
+endfunction
+
+function! DoMinJS( )
+    set filetype=javascript
+    execute "normal! ggVGJ"
+    %s:\([\+=\-(){};\[\]]\)\([ ]\):\1:g
+    %s:\([ ]\)\([(){};\[\]\+\-=]\):\2:g
+endfunction
+
 command! -nargs=1 ChangeTag call ChangeTag(<f-args>)
 command! PrettyJSON call DoPrettyJSON()
 command! PrettyXML call DoPrettyXML('')
 command! PrettyHTML call DoPrettyXML('html')
+command! PrettyJS call DoPrettyJS()
+command! MinifyJS call DoMinJS()
 
 au BufNewFile,BufRead *.java call Config_java()
 
@@ -179,7 +198,6 @@ endif
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
 endif
-
 
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     " if we have plug.vim available, load these plugins
