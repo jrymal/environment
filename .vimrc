@@ -1,6 +1,8 @@
 "colorscheme desert
 colorscheme pablo
 
+set shell=zsh
+
 set clipboard=unnamed
 " set clipboard=unnamedplus
 
