@@ -1,0 +1,2 @@
+export JDK_HOME=/usr/java/jdk1.7.0_55/
+. $DOTFILES/java/javaExports

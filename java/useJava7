@@ -1,0 +1,2 @@
+export JDK_HOME=/opt/java/java7
+. $DOTFILES/java/javaExports

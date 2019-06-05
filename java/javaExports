@@ -1,0 +1,16 @@
+addToPath(){
+    case ":$PATH:" in
+      *":${1}:"*) :;; # already there
+      *) PATH="${1}:$PATH";; # or PATH="$PATH:$new_entry"
+    esac 
+}
+
+JRE_HOME=${JDK_HOME}/jre
+JAVA_HOME=${JRE_HOME}
+
+addToPath ${JDK_HOME}/bin
+addToPath ${JRE_HOME}/bin
+
+export JRE_HOME JAVA_HOME PATH
+
+

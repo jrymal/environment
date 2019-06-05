@@ -1,20 +1,18 @@
 #!/usr/bin/env zsh
-
-# export PATH=$HOME/.config/composer/vendor/bin:$PATH
 export DOTFILES=$HOME/Documents/workspace/environment
 export INCLUDES=$DOTFILES
 
-source $DOTFILES/env
-source $DOTFILES/aliases
+source $DOTFILES/startTmux
+
 source $DOTFILES/dircolors
+source $DOTFILES/aliases
+source $DOTFILES/env
 
 #source $INCLUDES/zsh-completions/zsh-completions.plugin.zsh
 #source $INCLUDES/zsh-history-substring-search/zsh-history-substring-search.zsh
 #source $INCLUDES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' completer _complete
