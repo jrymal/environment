@@ -62,6 +62,6 @@ vim_prompt() {
 }
 
 PS1='
+%{$fg[yellow]%}[%D{%f/%m/%y} %D{%L:%M:%S}]
 $(vim_prompt)%F{blue}%~$(git_prompt)
 %F{244}%# %F{reset}'
-
