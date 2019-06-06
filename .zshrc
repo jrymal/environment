@@ -46,9 +46,9 @@ alias -s gz=gunzip
 alias -s zip=unzip
 
 bindkey -v
-
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
+bindkey '^R' history-incremental-search-backward
 
 git_prompt() {
   BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
