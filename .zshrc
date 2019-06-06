@@ -39,7 +39,7 @@ setopt interactivecomments
 setopt share_history
 setopt autocd autopushd pushdignoredups
 
-alias -s {properties,patch,css,source,txt,orig,diff,sh,retry,new,py,log,java,js,json,conf,c,cpp,h,hpp,xslt,xml,yml,yaml}=$EDITOR
+alias -s {properties,patch,css,source,txt,orig,diff,retry,new,py,log,java,js,json,conf,c,cpp,h,hpp,xslt,xml,yml,yaml}=$EDITOR
 alias -s {de,net,com,org,htm,html}=$BROWSER
 alias -s tar.gz=tar xzvf
 alias -s gz=gunzip
