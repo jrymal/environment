@@ -4,9 +4,9 @@ export INCLUDES=$DOTFILES
 
 source $DOTFILES/startTmux
 
+source $DOTFILES/env
 source $DOTFILES/dircolors
 source $DOTFILES/aliases
-source $DOTFILES/env
 
 #source $INCLUDES/zsh-completions/zsh-completions.plugin.zsh
 #source $INCLUDES/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -37,6 +37,13 @@ setopt hist_verify
 setopt inc_append_history
 setopt interactivecomments
 setopt share_history
+setopt autocd autopushd pushdignoredups
+
+alias -s {properties,patch,source,txt,orig,diff,sh,retry,new,py,log,java,js,json,conf,c,cpp,h,hpp,xslt,xml,yml,yaml}=$EDITOR
+alias -s {de,net,com,org,htm,html}=$BROWSER
+alias -s tar.gz=tar xzvf
+alias -s gz=gunzip
+alias -s zip=unzip
 
 bindkey -v
 
@@ -65,3 +72,4 @@ PS1='
 %{$fg[yellow]%}[%D{%f/%m/%y} %D{%L:%M:%S}]
 $(vim_prompt)%F{blue}%~$(git_prompt)
 %F{244}%# %F{reset}'
+
