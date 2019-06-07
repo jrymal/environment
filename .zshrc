@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 export DOTFILES=$HOME/Documents/workspace/environment
-export INCLUDES=$DOTFILES
+export INCLUDES=~/.local/shell
 
 source $DOTFILES/startTmux
 
@@ -8,9 +8,7 @@ source $DOTFILES/env
 source $DOTFILES/dircolors
 source $DOTFILES/aliases
 
-#source $INCLUDES/zsh-completions/zsh-completions.plugin.zsh
-#source $INCLUDES/zsh-history-substring-search/zsh-history-substring-search.zsh
-#source $INCLUDES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $INCLUDES/*
 
 HISTFILE=$HOME/.zsh_history
 
