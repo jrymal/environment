@@ -8,7 +8,15 @@ source $DOTFILES/env
 source $DOTFILES/dircolors
 source $DOTFILES/aliases
 
-source $INCLUDES/*
+if [[ -d "$INCLUDES" && 
+    -z "$(find $INCLUDES -maxdepth 0 -type d -empty 2> /dev/null)" ]]; then
+    for localInc in $( $INCLUDES/* ); do
+        source "$localInc"
+    done
+else
+    echo "No directory or files for local setup found at $INCLUDES"
+fi
+
 
 HISTFILE=$HOME/.zsh_history
 
