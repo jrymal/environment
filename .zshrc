@@ -72,8 +72,21 @@ vim_prompt() {
   fi
 }
 
+TRAPZERR() {
+  local LAST_COMMAND=$_ 
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    echo "${COLOR_RED}ERROR: ${COLOR_YELLOW}${LAST_COMMAND}" 
+  fi
+}
+
+command_not_found_handler() {
+  local LAST_COMMAND=$1 
+  local LAST_ARGS=$2
+  echo "${COLOR_RED}command not found: ${COLOR_YELLOW}${LAST_COMMAND}" 
+}
+
 PS1='
-%{$fg[yellow]%}[%D{%f/%m/%y} %D{%L:%M:%S}]
+%F{yellow}[%D{%f/%m/%y} %D{%L:%M:%S}]
 $(vim_prompt)%F{blue}%~$(git_prompt)
 %F{244}%# %F{reset}'
-
