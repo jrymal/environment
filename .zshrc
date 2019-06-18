@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-export DOTFILES=$HOME/Documents/workspace/environment
+export DOTFILES=$HOME/environment
 export INCLUDES=~/.local/shell
 
 source $DOTFILES/startTmux
