@@ -28,6 +28,8 @@ zmodload -i zsh/complist
 unsetopt menu_complete
 unsetopt flowcontrol
 
+setopt chase_dots
+setopt chase_links
 setopt prompt_subst
 setopt always_to_end
 setopt append_history

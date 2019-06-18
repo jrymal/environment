@@ -1,1 +1,5 @@
 export PATH=$PATH:$DOTFILES/java
+
+alias mvn=$DOTFILES/java/mvnc
+
+

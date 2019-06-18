@@ -5,7 +5,7 @@ export QUOTING_STYLE=literal
 export TERM=xterm-256color
 
 # don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=999999
 SAVEHIST=999999
 HISTFILESIZE=999999
