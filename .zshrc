@@ -89,6 +89,6 @@ command_not_found_handler() {
 }
 
 PS1='
-%F{yellow}[%D{%f/%m/%y} %D{%L:%M:%S}]
+%F{yellow}[%D{%Y-%m-%f}T%D{%H:%M:%S}]
 $(vim_prompt)%F{blue}%~$(git_prompt)
 %F{244}%# %F{reset}'
