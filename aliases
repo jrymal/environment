@@ -1,6 +1,22 @@
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    alias ls='ls --color=auto'
-fi
+case "$OSTYPE" in
+    linux-gnu)
+        alias ls='ls --color=auto'
+        alias update='sudo apt update && sudo apt dist-upgrade && sudo apt autoclean'
+        ;;
+    darwin*)
+        alias update='brew update && brew upgrade && brew cleanup'
+        ;;
+    cygwin)
+        ;; 
+    msys) 
+        ;;
+    win32)
+        ;;
+    freebsd*) 
+        ;;
+    *) 
+        ;;
+esac
 
 #alias dir='dir --color=auto'
 #alias vdir='vdir --color=auto'
