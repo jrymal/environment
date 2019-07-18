@@ -1,4 +1,6 @@
 import XMonad.Hooks.SetWMName
+import XMonad.Actions.SpawnOn
+import XMonad.Util.SpawnOnce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Cursor
@@ -8,9 +10,14 @@ import System.IO
 import Graphics.X11.ExtraTypes.XF86
 import XMonad
 
+import qualified XMonad.StackSet as W
+
 myStartupHook :: X ()
 myStartupHook = do
         setWMName "LG3D"
+        spawnOnOnce "workspace1" "google-chrome"
+        spawnOnOnce "workspace1" "urxvt"
+        spawnOnOnce "workspace1" "/opt/intellij/current/bin/idea.sh"
 
 main = do
     xmproc <- spawnPipe ( "xmobar " ++ "~/.xmonad/.mobarrc")
@@ -28,8 +35,8 @@ main = do
         , terminal = "urxvt"
         , startupHook = myStartupHook
         , borderWidth = 2
-        , normalBorderColor = "#cccccc"
-        , focusedBorderColor = "#ff0000"
+        , normalBorderColor = "#303030"
+        , focusedBorderColor = "#b00000"
         } `additionalKeys`
         [ 
             ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off"), 
