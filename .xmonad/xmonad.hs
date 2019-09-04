@@ -17,7 +17,6 @@ myStartupHook = do
         setWMName "LG3D"
         spawnOnOnce "workspace1" "google-chrome"
         spawnOnOnce "workspace1" "urxvt"
-        spawnOnOnce "workspace1" "/opt/intellij/current/bin/idea.sh"
 
 main = do
     xmproc <- spawnPipe ( "xmobar " ++ "~/.xmonad/.mobarrc")
