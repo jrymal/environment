@@ -1,10 +1,16 @@
 "colorscheme desert
 colorscheme pablo
 
+set hidden
+
 set shell=zsh
 
-set clipboard=unnamed
-" set clipboard=unnamedplus
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamed
+  set clipboard=unnamedplus "Linux
+endif
 
 set backspace=2 " Backspace deletes like most programs in insert mode
 set ruler " show the cursor position all the time
@@ -67,7 +73,11 @@ filetype indent on
 
 " enable line numbers
 set number
+set relativenumber
 set numberwidth=5
+
+" indicate hidden characters
+set list
 
 " tab auto complete settings
 set complete=.,b,u,] 
@@ -122,15 +132,15 @@ function ChangeTag(to)
 endfunction
 
 function! DoPrettyXML( execType )
-	" save the filetype so we can restore it later
-	let l:origft = &ft
-	set ft=
-	" delete the xml header if it exists. This will
-	" permit us to surround the document with fake tags
-	" without creating invalid xml.
-	1s/<?xml .*?>//e
+    " save the filetype so we can restore it later
+    let l:origft = &ft
+    set ft=
+    " delete the xml header if it exists. This will
+    " permit us to surround the document with fake tags
+    " without creating invalid xml.
+    1s/<?xml .*?>//e
     if a:execType == 'html'
-	    silent %!xmllint --html --format - 2> /dev/null
+        silent %!xmllint --html --format - 2> /dev/null
         " Line breaks for anything with a '<'
         %s/</\r&/g
         " Delete empty lines
@@ -145,7 +155,7 @@ function! DoPrettyXML( execType )
         " XML that may contain multiple top-level elements.
         0put ='<PrettyXML>'
         $put ='</PrettyXML>'
-	    silent %!xmllint --format - 2> /dev/null
+        silent %!xmllint --format - 2> /dev/null
         " xmllint will insert an <?xml?> header. it's easy enough to delete
         " if you don't want it. delete the fake tags
         2d
@@ -155,20 +165,20 @@ function! DoPrettyXML( execType )
         silent %<
     endif
     " back to home
-	1
-	" restore the filetype
-	exe "set ft=" . l:origft
+    1
+    " restore the filetype
+    exe "set ft=" . l:origft
 endfunction
 
 function! DoPrettyJSON( )
-	" save the filetype so we can restore it later
-	let l:origft = &ft
-	set ft=
+    " save the filetype so we can restore it later
+    let l:origft = &ft
+    set ft=
     silent %!json_pp - 2> /dev/null
     " back to home
-	1
-	" restore the filetype
-	exe "set ft=" . l:origft
+    1
+    " restore the filetype
+    exe "set ft=" . l:origft
 endfunction
 
 function! Config_java( )
