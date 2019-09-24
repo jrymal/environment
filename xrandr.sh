@@ -9,6 +9,10 @@ laptop_mode="1920x1080"
 hdmi_LCD_mode="2560x1440"
 dp_LCD_mode="2560x1440"
 
+laptop_orientation="normal"
+hdmi_LCD_orientation="right"
+dp_LCD_orientation="normal"
+
 # Reset all inputs if there is an argument
 case "${1}" in
     '')
@@ -36,11 +40,14 @@ for input in $( xrandr-tool outputs ); do
         # add modes and set the mode for each output
         case ${input} in
             eDP-1*)
-                mode=${laptop_mode};;
+                mode=${laptop_mode};
+                orientation=${laptop_orientation};;
             HDMI-1*)
-                mode=${hdmi_LCD_mode};;
+                mode=${hdmi_LCD_mode};
+                orientation=${hdmi_LCD_orientation};;
             DP-1*)
-                mode=${dp_LCD_mode};;
+                mode=${dp_LCD_mode};
+                orientation=${dp_LCD_orientation};;
             *)
                 echo "Unknown monitor type: ${input}"
         esac
@@ -65,10 +72,10 @@ for input in $( xrandr-tool outputs ); do
             if [ -z "${first}" ]; then
                 first=true
             fi
-            arguments="${arguments} --output ${input} --mode ${mode} --right-of ${lastM}"
+            arguments="${arguments} --output ${input} --mode ${mode} --right-of ${lastM} --rotate ${orientation}"
         else
             # always first
-            arguments="--output ${input} --mode ${mode}"
+            arguments="--output ${input} --mode ${mode} --rotate ${orientation}"
         fi 
 
         # set last to set positioning
@@ -77,4 +84,5 @@ for input in $( xrandr-tool outputs ); do
 done
 
 # Actually set the modes and settings in one line (less screen flickers and time spent)
+echo "xrandr ${arguments}"
 xrandr ${arguments} 
