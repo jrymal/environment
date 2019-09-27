@@ -3,6 +3,7 @@ import XMonad.Actions.SpawnOn
 import XMonad.Util.SpawnOnce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.NoBorders
 import XMonad.Util.Cursor
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
@@ -24,7 +25,9 @@ main = do
     xmonad $ def
         { manageHook = manageDocks <+> manageHook def
         , handleEventHook    = handleEventHook def <+> docksEventHook
-        , layoutHook = avoidStruts  $  layoutHook def
+        , layoutHook = smartBorders $
+                    avoidStruts $
+                    layoutHook def
         , logHook = dynamicLogWithPP xmobarPP     
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 100
