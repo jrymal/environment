@@ -11,6 +11,7 @@ import System.IO
 import Graphics.X11.ExtraTypes.XF86
 import XMonad
 
+import qualified Data.Map as M         -- haskell modules
 import qualified XMonad.StackSet as W
 
 myStartupHook :: X ()
@@ -34,6 +35,7 @@ main = do
                         , ppCurrent = xmobarColor "red" "" 
                         }
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
+        , mouseBindings = myMouseBindings
         , terminal = "urxvt"
         , startupHook = myStartupHook
         , borderWidth = 2
@@ -50,4 +52,17 @@ main = do
             ((mod4Mask .|. shiftMask .|. controlMask, xK_q), spawn "/sbin/shutdown -h now"),
             ((0, xF86XK_Search), spawn "google-chrome")
         ]
+
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
+    -- mod-button1, Set the window to floating mode and move by dragging
+    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
+                                       >> windows W.shiftMaster))
+
+    -- mod-button2, Sink the window back to the grid.
+    , ((mod4Mask .|. controlMask, button1), (\w -> withFocused $ windows . W.sink))
+
+    -- mod-button3, Set the window to floating mode and resize by dragging
+    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
+                                       >> windows W.shiftMaster))
+    ]
 
