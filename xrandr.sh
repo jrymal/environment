@@ -10,7 +10,7 @@ hdmi_LCD_mode="2560x1440"
 dp_LCD_mode="2560x1440"
 
 laptop_orientation="normal"
-hdmi_LCD_orientation="right"
+hdmi_LCD_orientation="normal"
 dp_LCD_orientation="normal"
 
 # Reset all inputs if there is an argument
