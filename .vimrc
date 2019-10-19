@@ -31,13 +31,13 @@ set scrolloff=5
 "almost nerd tree
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-augroup ProjectDrawer
-  autocmd!
-  autocmd VimEnter * :Vexplore
-augroup END
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 set wildignorecase " case-insensitive search
 
@@ -132,6 +132,7 @@ noremap <leader>p "*p
 noremap <leader>Y "+y
 noremap <leader>P "+p
 
+map <C-e> :Vexplore <CR>
 map <f4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw <CR>
 
 function ChangeTag(to)
@@ -233,14 +234,14 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin()
 
     " Plugin outside ~/.vim/plugged with post-update hook
-    Plug 'junegunn/fzf'
+    "Plug 'junegunn/fzf'
 
     " NERD tree will be loaded on the first invocation of NERDTreeToggle command
-    Plug 'scrooloose/nerdtree'
+    "Plug 'scrooloose/nerdtree'
 
-    Plug 'tpope/vim-sensible'
+    "Plug 'tpope/vim-sensible'
 
-    Plug 'pangloss/vim-javascript'
+    "Plug 'pangloss/vim-javascript'
 
     call plug#end()
 endif
