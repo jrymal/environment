@@ -5,7 +5,7 @@ INSTALL_FROM="${HOME}/environment"
 INSTALL_TO="${HOME}"
 
 COMMON_PKGS="zsh screen tmux vim"
-XMONAD_PKGS="xmonad suckless-tools xscreensaver xmobar scrot rxvt-unicode pavucontrol alsa-utils"
+XMONAD_PKGS="xinit xmonad suckless-tools xscreensaver xmobar scrot rxvt-unicode pavucontrol alsa-utils"
 
 function unsupportedOS {
     echo "Unsupported OS: ${1}"
