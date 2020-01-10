@@ -51,6 +51,7 @@ function installFile {
 # install packages and handle OS specific functions and flags
 case "$OSTYPE" in
     linux-gnu)
+        IS_LINUX=true
         SUPPORTS_XMONAD=true
         # TODO:  validate package manager
         sudo apt install ${COMMON_PKGS} ${XMONAD_PKGS}
@@ -58,7 +59,7 @@ case "$OSTYPE" in
     darwin*)
         # Mac OSX
         # TODO:  install homebrew
-        brew install ${COMMON_PKGS}
+        #brew install ${COMMON_PKGS}
         ;;
     cygwin) 
         unsupportedOS "${OSTYPE}" ;;
@@ -92,4 +93,11 @@ installFile ".vimrc"
 if [[ -n "${SUPPORTS_XMONAD}" ]]; then
     installFile ".mobarrc" ".xmonad/"
     installFile "xmonad.hs" ".xmonad/"
+    installFile ".stalonetrayrc" 
+fi
+if [[ -n "${IS_LINUX}" ]]; then
+    installFile "tmux.conf" 
+    installFile ".xsessionrc" 
+    installFile ".Xdefaults" 
+    installFile ".Xresources" 
 fi
