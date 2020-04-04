@@ -3,7 +3,10 @@ colorscheme pablo
 
 set hidden
 
-set shell=zsh
+" prefer zsh, otherwise live with current shell
+if executable('zsh')
+    set shell=zsh
+endif
 
 if system('uname -s') == "Darwin\n"
   set clipboard=unnamed "OSX
