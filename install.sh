@@ -27,6 +27,8 @@ function installFile {
         ensureDir "${INSTALL_TO}/${dir}"
         path="${dir}${path}"
     fi
+    
+    local destFile="${INSTALL_TO}/${path}"
 
     if [ ! -f "${INSTALL_FROM}/${path}" ]; then
         echo "Well that's embarrassing: ${INSTALL_FROM}/${path} doesn't exist"
@@ -34,17 +36,17 @@ function installFile {
     fi
 
     # remove old symlink
-    test -L "${INSTALL_TO}/${path}" && rm "${INSTALL_TO}/${path}"
+    test -L "${destFile}" && rm "${destFile}"
     
     # Check for modifications
-    if [ ! -f "${INSTALL_TO}/${path}" -o -n "$(diff ${INSTALL_TO}/${path} ${INSTALL_FROM}/${path})" ]; then
+    if [ ! -f "${destFile}" ]; then
 
         
         # move old symlink
-        test -f "${INSTALL_TO}/${path}" && mv "${INSTALL_TO}/${path}" "${INSTALL_TO}/${path}-old"
+        test -f "${INSTALL_TO}/${path}" && mv "${destFile}" "${destFile}-old"
 
         # make new symlink
-        ln -s "${INSTALL_FROM}/${path}" "${INSTALL_TO}/${path}"
+        ln -s "${INSTALL_FROM}/${path}" "${destFile}"
     fi
 }
 
