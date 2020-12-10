@@ -129,8 +129,8 @@ map <C-W><Right> <C-w>l
 
 map - <C-W>-
 map + <C-W>+
-map < <C-W><
-map > <C-W>>
+"map < <C-W><
+"map > <C-W>>
 
 noremap <leader>y "*y
 noremap <leader>p "*p

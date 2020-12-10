@@ -6,12 +6,17 @@ set -e
 # laptop_mode="2560x1440"
 
 laptop_mode="1920x1080"
-hdmi_LCD_mode="2560x1440"
-dp_LCD_mode="2560x1440"
+hdmi_LCD_mode="1920x1080"
+dp_LCD_mode="1920x1080"
+#hdmi_LCD_mode="2560x1440"
+#dp_LCD_mode="2560x1440"
 
 laptop_orientation="normal"
 hdmi_LCD_orientation="normal"
 dp_LCD_orientation="normal"
+
+direction=left
+#direction=right
 
 # Reset all inputs if there is an argument
 case "${1}" in
@@ -72,7 +77,7 @@ for input in $( xrandr-tool outputs ); do
             if [ -z "${first}" ]; then
                 first=true
             fi
-            arguments="${arguments} --output ${input} --mode ${mode} --right-of ${lastM} --rotate ${orientation}"
+            arguments="${arguments} --output ${input} --mode ${mode} --${direction}-of ${lastM} --rotate ${orientation}"
         else
             # always first
             arguments="--output ${input} --mode ${mode} --rotate ${orientation}"
