@@ -99,7 +99,6 @@ command_not_found_handler() {
 
 PS1='
 %F{yellow}[%D{%Y-%m-%f}T%D{%H:%M:%S}]
-$(restart_prompt)
-$(vim_prompt)%F{blue}%~$(git_prompt)
+$(restart_prompt)$(vim_prompt)%F{blue}%~$(git_prompt)
 %F{244}%# %F{reset}'
 
