@@ -57,13 +57,22 @@ bindkey '^e' end-of-line
 bindkey '^R' history-incremental-search-backward
 
 git_prompt() {
-  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
+  local BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
 
   if [ ! -z $BRANCH ]; then
     echo -n "%F{yellow}$BRANCH"
 
     if [ ! -z "$(git status --short)" ]; then
       echo " %F{red}✗"
+    fi
+  fi
+}
+
+restart_prompt() {
+  if [ -e /var/run/reboot-required ]; then 
+    local RESTART=$(cat /var/run/reboot-required)
+    if [ ! -z $RESTART ]; then
+        echo "%F{yellow}${RESTART} ";
     fi
   fi
 }
@@ -90,5 +99,7 @@ command_not_found_handler() {
 
 PS1='
 %F{yellow}[%D{%Y-%m-%f}T%D{%H:%M:%S}]
+$(restart_prompt)
 $(vim_prompt)%F{blue}%~$(git_prompt)
 %F{244}%# %F{reset}'
+

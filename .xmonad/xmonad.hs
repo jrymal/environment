@@ -45,6 +45,7 @@ main = do
         [ 
             ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off"), 
             ((0, xK_Print), spawn "scrot -u screen_%Y-%m-%dT%H-%M-%S.png -e 'mv $f ~/Pictures/' "),
+            ((mod4Mask, xK_s), spawn "scrot -u screen_%Y-%m-%dT%H-%M-%S.png -e 'mv $f ~/Pictures/' "),
             ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5-"),
             ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5+"),
             ((0, xF86XK_AudioMute), spawn "amixer set Master toggle"),

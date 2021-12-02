@@ -5,25 +5,55 @@ set -e
 # supported but not used cause too small...#gettingTooOld
 # laptop_mode="2560x1440"
 
-laptop_mode="1920x1080"
-hdmi_LCD_mode="1920x1080"
-dp_LCD_mode="1920x1080"
-#hdmi_LCD_mode="2560x1440"
-#dp_LCD_mode="2560x1440"
-
-laptop_orientation="normal"
-hdmi_LCD_orientation="normal"
-dp_LCD_orientation="normal"
-
-direction=left
-#direction=right
-
 # Reset all inputs if there is an argument
 case "${1}" in
     '')
         # nothing to do
+        # sets up in a linear line of monitors
+        laptop_orientation="normal"
+        hdmi_LCD_orientation="normal"
+        dp_LCD_orientation="normal"
+
+        direction=left
+        #direction=right
+        
+        laptop_mode="1920x1080"
+        hdmi_LCD_mode="1920x1080"
+        dp_LCD_mode="1920x1080"
+        #hdmi_LCD_mode="2560x1440"
+        #dp_LCD_mode="2560x1440"
+        ;;
+    'h')
+        # home set up
+        # set left and then next is lower
+        laptop_orientation="normal"
+        hdmi_LCD_orientation="normal"
+        dp_LCD_orientation="normal"
+        
+        direction=left
+        #direction=right
+
+        laptop_mode="1920x1080"
+        hdmi_LCD_mode="1920x1080"
+        dp_LCD_mode="1920x1080"
+        #hdmi_LCD_mode="2560x1440"
+        #dp_LCD_mode="2560x1440"
         ;;
     *)
+        # work setup
+        laptop_orientation="normal"
+        hdmi_LCD_orientation="normal"
+        dp_LCD_orientation="normal"
+        
+        direction=left
+        #direction=right
+
+        laptop_mode="1920x1080"
+        hdmi_LCD_mode="1920x1080"
+        dp_LCD_mode="1920x1080"
+        #hdmi_LCD_mode="2560x1440"
+        #dp_LCD_mode="2560x1440"
+        
         echo "Nothing recogonized, assumed reset...."
         arguments=""
         for input in $( xrandr-tool outputs ); do
